@@ -11,7 +11,9 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "openai-php/laravel": "^0.10.2",
+        "upstash/vector-laravel": "^0.2.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
