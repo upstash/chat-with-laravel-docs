@@ -1,13 +1,7 @@
 <?php
 
+use App\Http\Controllers\QueryController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [QueryController::class, 'index']);
 
-Route::get('/prompt', function () {
-    return view('prompts.system', [
-        'version' => '11',
-    ]);
-});
