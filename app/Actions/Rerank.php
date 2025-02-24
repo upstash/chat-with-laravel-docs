@@ -2,9 +2,7 @@
 
 namespace App\Actions;
 
-use Illuminate\Support\Facades\File;
 use OpenAI\Laravel\Facades\OpenAI;
-use Upstash\Vector\DataQuery;
 use Upstash\Vector\DataQueryResult;
 use Upstash\Vector\VectorMatch;
 
