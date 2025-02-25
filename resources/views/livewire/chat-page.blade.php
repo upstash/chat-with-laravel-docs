@@ -54,9 +54,9 @@
             </div>
             <div class="p-6 border-t dark:border-slate-700">
                 <form wire:submit="askQuestion">
-                    <input autofocus wire:model="question" type="text" placeholder="Ask your question" class="border bg-white dark:bg-slate-700 border-slate-600 rounded-lg w-full py-2 px-3">
+                    <input autofocus wire:model="question" type="text" placeholder="Write a question here and we will try to figure how the best way to answer that." class="border bg-white dark:bg-slate-700 dark:border-slate-600 rounded-lg w-full py-2 px-3 focus:ring focus:ring-orange-500 focus:outline-none">
                     <div class="flex justify-end pt-4">
-                        <button class="border rounded-full px-4 py-1.5">Ask Question</button>
+                        <button class="border bg-gray-50 hover:bg-gray-100 dark:border-slate-600 dark:bg-slate-700 dark:hover:bg-slate-600 focus:ring focus:ring-orange-500 focus:outline-none rounded-lg px-4 py-1.5">Send Question</button>
                     </div>
                 </form>
             </div>
