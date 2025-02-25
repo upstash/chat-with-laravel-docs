@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\Rerank;
 use Illuminate\Console\Command;
 use OpenAI\Laravel\Facades\OpenAI;
 use Upstash\Vector\DataQuery;

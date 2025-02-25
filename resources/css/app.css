@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.markdown h1 {
+    @apply text-2xl py-1.5;
+}
+
+.markdown h2 {
+    @apply text-xl py-1.5;
+}
+
+.markdown h3 {
+    @apply text-lg py-1.5;
+}
+
+.markdown h4 {
+    @apply text-base;
+}
+
+.markdown p {
+    @apply text-sm py-1.5;
+}
+
+.markdown code {
+    @apply bg-gray-100 text-sm rounded-lg px-2 py-1;
+}

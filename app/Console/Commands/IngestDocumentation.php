@@ -7,6 +7,7 @@ use App\Splitters\LaravelMarkdownSplitter;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Str;
 use SplFileInfo;
 use Symfony\Component\Console\Exception\InvalidArgumentException;
@@ -19,7 +20,7 @@ class IngestDocumentation extends Command
      * The name and signature of the console command
      * @var string
      */
-    protected $signature = 'app:ingest:documentation {version=11}';
+    protected $signature = 'app:ingest:documentation';
 
     /**
      * The console command description.
@@ -34,8 +35,13 @@ class IngestDocumentation extends Command
 
     public function handle()
     {
-        $this->version = $this->argument('version');
+        $this->version = '12';
         $path = storage_path('/docs');
+
+        File::deleteDirectory($path);
+
+        Process::run('git clone https://github.com/laravel/docs.git ' . $path);
+        File::deleteDirectory($path . '/.git');
 
         $files = File::files($path);
 
@@ -91,6 +97,6 @@ class IngestDocumentation extends Command
     {
 
         return collect(explode("\n", $document->getContent()))
-            ->every(fn($line) => Str::startsWith($line, '#'));
+            ->every(fn($line) => Str::startsWith($line, '#') || Str::startsWith($line, ''));
     }
 }
