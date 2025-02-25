@@ -16,6 +16,8 @@ class ChatPage extends Component
 
     public bool $isChatLoading = false;
 
+    public bool $useReranker = false;
+
     public array $chat = [
         [
             'role' => 'assistant',
@@ -36,7 +38,7 @@ class ChatPage extends Component
             [
                 'role' => 'user',
                 'content' => $this->question,
-            ]
+            ],
         ];
 
         // loopback from JS
@@ -52,15 +54,22 @@ class ChatPage extends Component
     {
         $results = Vector::queryData(new DataQuery(
             data: $question,
-            topK: 8,
+            topK: $this->useReranker ? 10 : 8,
             includeMetadata: true,
             includeData: true,
             queryMode: QueryMode::DENSE,
         ));
 
+        if ($this->useReranker) {
+            $reranker = new Rerank();
+            $results = $reranker->run($question, $results);
+        }
+
         $this->context = collect($results)
+            ->take(8)
             ->map(fn(VectorMatch $result) => [
                 'text' => $result->data,
+                'score' => $result->score,
                 'sources' => $result->metadata['sources'],
             ])
             ->toArray();

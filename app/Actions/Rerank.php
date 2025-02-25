@@ -15,6 +15,8 @@ class Rerank
 
     public function run(string $query, DataQueryResult $result): DataQueryResult
     {
+        // TODO: Implement Semantic Cache
+        
         $prompt = $this->preparePrompt($query, $result);
 
         $keyedBy = collect($result)->keyBy(fn(VectorMatch $match) => $match->id); 
@@ -50,6 +52,7 @@ class Rerank
     {
         $result = OpenAI::chat()->create([
             'model' => 'gpt-4o-mini',
+            'max_tokens' => 8000,
             'messages' => [
                 [
                     'role' => 'system',

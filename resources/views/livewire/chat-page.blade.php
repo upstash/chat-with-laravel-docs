@@ -62,9 +62,15 @@
             </div>
         </section>
         <section class="flex-1 flex flex-col border dark:border-slate-700 rounded-lg bg-white dark:bg-slate-800 shadow-lg h-full">
-            <div class="border-b dark:border-slate-700 p-6">
+            <div class="border-b dark:border-slate-700 p-6 flex justify-between items-center">
+                <div>
                 <h1 class="font-semibold">Debug Context</h1>
                 <p class="text-sm opacity-50">See what parts of the documentation were fetched from our vector database</p>
+                </div>
+                <div class="flex items-center">
+                    <input type="checkbox" wire:model="useReranker" class="rounded-lg border-gray-300 dark:border-slate-600 accent-orange-600">
+                    <label class="ml-2 text-sm dark:text-slate-400">Use Reranker</label>
+                </div>
             </div>
             <div class="overflow-y-scroll flex-1 flex flex-col space-y-6 divide-y dark:divide-slate-700">
                 @foreach ($context as $item)
