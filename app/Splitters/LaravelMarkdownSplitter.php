@@ -53,7 +53,11 @@ class LaravelMarkdownSplitter
 
         $documents[] = $currentDocument;
 
-        return array_values(array_filter($documents));
+        return collect($documents)
+            ->filter()
+            ->filter(fn (Document $document) => ! $document->hasOnlyTitles())
+            ->values()
+            ->toArray();
     }
 
     private function getTitleIndex(string $line): int

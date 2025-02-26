@@ -72,9 +72,6 @@ class IngestDocumentation extends Command
         $usedMemory = (memory_get_usage() - $memory) / 1024;
 
         $upserts = collect($documents)
-            ->filter(function (Document $document) {
-                return ! $this->contentIsJustHeadings($document);
-            })
             ->map(fn (Document $document) => new DataUpsert(
                 id: Str::uuid(),
                 data: $document->getContent(),
@@ -90,12 +87,5 @@ class IngestDocumentation extends Command
         Vector::upsertDataMany($upserts->toArray());
 
         $this->info("File $fileName has $documentCount documents, used $usedMemory kb.");
-    }
-
-    private function contentIsJustHeadings(Document $document): bool
-    {
-
-        return collect(explode("\n", $document->getContent()))
-            ->every(fn ($line) => Str::startsWith($line, '#') || Str::startsWith($line, ''));
     }
 }

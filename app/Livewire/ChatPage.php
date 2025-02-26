@@ -74,7 +74,7 @@ class ChatPage extends Component
             ])
             ->toArray();
 
-        $this->js(sprintf('$wire.generateAnswer("%s")', $question));
+        // $this->js(sprintf('$wire.generateAnswer("%s")', $question));
     }
 
     public function generateAnswer(string $question)

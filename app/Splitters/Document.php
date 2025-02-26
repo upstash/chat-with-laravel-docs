@@ -57,4 +57,11 @@ class Document implements Stringable
     {
         return $this->links;
     }
+
+    public function hasOnlyTitles(): bool
+    {
+        $lines = explode("\n", trim($this->content));
+
+        return count($lines) === count(array_filter($lines, fn ($line) => preg_match('/^#{1,6}/', $line)));
+    }
 }
