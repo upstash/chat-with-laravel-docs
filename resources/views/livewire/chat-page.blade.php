@@ -1,7 +1,7 @@
 <div class="h-full flex flex-col">
     <div class="px-6 pt-6 flex justify-between items-center">
         <div class="flex items-center space-x-2">
-            <span>Built using</span>
+            <span>Powered by</span>
             <x-icons.vector class="w-8 h-8" />
             <span>Upstash Vector</span>
         </div>
