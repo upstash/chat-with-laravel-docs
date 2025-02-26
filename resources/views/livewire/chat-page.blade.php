@@ -77,7 +77,7 @@
             <div class="overflow-y-scroll flex-1 flex flex-col space-y-6 divide-y dark:divide-slate-700">
                 @foreach ($context as $item)
                     <div class="p-6">
-                        <x-markdown class="markdown whitespace-pre-wrap" :highlight-code="false">{!! $item['text'] !!}</x-markdown>
+                        <x-markdown class="markdown" :highlight-code="false">{!! $item['text'] !!}</x-markdown>
                         <div class="pt-6">
                             <h3 class="font-semibold pb-2 text-sm">Sources</h3>
                             <ul>
