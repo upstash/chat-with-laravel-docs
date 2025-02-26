@@ -6,7 +6,9 @@
             <span>Upstash Vector</span>
         </div>
         <div class="flex items-center space-x-2">
-            <span>[GitHub icon here]
+            <a aria-label="GitHub" href="https://github.com/upstash/chat-with-laravel-docs/" target="_blank" class="opacity-50 hover:opacity-100 p-2">
+                <x-icons.github class="w-6 h-6" />
+            </a>
         </div>
     </div>
     <div class="flex flex-col lg:flex-row p-6 flex-1 h-full max-h-full gap-4">
