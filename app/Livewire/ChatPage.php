@@ -107,10 +107,12 @@ class ChatPage extends Component
         ]);
 
         $text = '';
-        $markdownRenderer = app(\Spatie\LaravelMarkdown\MarkdownRenderer::class);
+        $markdownRenderer = app(\Spatie\LaravelMarkdown\MarkdownRenderer::class)
+            ->disableHighlighting();
+
         foreach ($stream as $response) {
             $text .= $response->choices[0]->delta->content;
-            $this->stream(to: 'answer', content: $markdownRenderer->disableHighlighting()->toHtml($text), replace: true);
+            $this->stream(to: 'answer', content: $markdownRenderer->toHtml($text), replace: true);
         }
 
         $this->chat[] = [
