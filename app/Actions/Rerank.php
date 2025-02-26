@@ -6,7 +6,7 @@ use OpenAI\Laravel\Facades\OpenAI;
 use Upstash\Vector\DataQueryResult;
 use Upstash\Vector\VectorMatch;
 
-class Rerank 
+class Rerank
 {
     public function __construct()
     {
@@ -16,10 +16,10 @@ class Rerank
     public function run(string $query, DataQueryResult $result): DataQueryResult
     {
         // TODO: Implement Semantic Cache
-        
+
         $prompt = $this->preparePrompt($query, $result);
 
-        $keyedBy = collect($result)->keyBy(fn(VectorMatch $match) => $match->id); 
+        $keyedBy = collect($result)->keyBy(fn (VectorMatch $match) => $match->id);
 
         $rerankedIds = $this->getRerankedIdsFromGpt($prompt);
 
@@ -81,7 +81,7 @@ class Rerank
                         'required' => ['results'],
                     ],
                     'strict' => true,
-                ]
+                ],
             ],
         ]);
 

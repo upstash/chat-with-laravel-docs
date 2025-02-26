@@ -5,12 +5,10 @@ namespace App\Console\Commands;
 use App\Splitters\Document;
 use App\Splitters\LaravelMarkdownSplitter;
 use Illuminate\Console\Command;
-use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Process;
 use Illuminate\Support\Str;
 use SplFileInfo;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Upstash\Vector\DataUpsert;
 use Upstash\Vector\Laravel\Facades\Vector;
 
@@ -18,6 +16,7 @@ class IngestDocumentation extends Command
 {
     /**
      * The name and signature of the console command
+     *
      * @var string
      */
     protected $signature = 'app:ingest:documentation';
@@ -40,8 +39,8 @@ class IngestDocumentation extends Command
 
         File::deleteDirectory($path);
 
-        Process::run('git clone https://github.com/laravel/docs.git ' . $path);
-        File::deleteDirectory($path . '/.git');
+        Process::run('git clone https://github.com/laravel/docs.git '.$path);
+        File::deleteDirectory($path.'/.git');
 
         $files = File::files($path);
 
@@ -73,10 +72,10 @@ class IngestDocumentation extends Command
         $usedMemory = (memory_get_usage() - $memory) / 1024;
 
         $upserts = collect($documents)
-            ->filter(function(Document $document) {
-                return !$this->contentIsJustHeadings($document);
+            ->filter(function (Document $document) {
+                return ! $this->contentIsJustHeadings($document);
             })
-            ->map(fn(Document $document) => new DataUpsert(
+            ->map(fn (Document $document) => new DataUpsert(
                 id: Str::uuid(),
                 data: $document->getContent(),
                 metadata: [
@@ -97,6 +96,6 @@ class IngestDocumentation extends Command
     {
 
         return collect(explode("\n", $document->getContent()))
-            ->every(fn($line) => Str::startsWith($line, '#') || Str::startsWith($line, ''));
+            ->every(fn ($line) => Str::startsWith($line, '#') || Str::startsWith($line, ''));
     }
 }

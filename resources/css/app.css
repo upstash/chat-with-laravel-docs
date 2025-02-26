@@ -23,5 +23,9 @@
 }
 
 .markdown code {
-    @apply bg-gray-100 text-sm rounded-lg px-2 py-1;
+    @apply block bg-gray-100 text-sm p-4 rounded-lg;
+}
+
+.markdown p code {
+    @apply inline-block bg-gray-100 text-sm p-0.5 rounded-lg;
 }

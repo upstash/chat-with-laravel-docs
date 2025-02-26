@@ -61,13 +61,13 @@ class ChatPage extends Component
         ));
 
         if ($this->useReranker) {
-            $reranker = new Rerank();
+            $reranker = new Rerank;
             $results = $reranker->run($question, $results);
         }
 
         $this->context = collect($results)
             ->take(8)
-            ->map(fn(VectorMatch $result) => [
+            ->map(fn (VectorMatch $result) => [
                 'text' => $result->data,
                 'score' => $result->score,
                 'sources' => $result->metadata['sources'],
@@ -82,7 +82,7 @@ class ChatPage extends Component
         $this->isChatLoading = false;
 
         $context = collect($this->context)
-            ->map(fn(array $item) => $item['text'])
+            ->map(fn (array $item) => $item['text'])
             ->implode("\n---\n");
 
         $messages = [
@@ -107,26 +107,22 @@ class ChatPage extends Component
         ]);
 
         $text = '';
-        foreach($stream as $response) {
+        $markdownRenderer = app(\Spatie\LaravelMarkdown\MarkdownRenderer::class);
+        foreach ($stream as $response) {
             $text .= $response->choices[0]->delta->content;
-            $this->stream(to: 'answer', content: $this->renderMarkdown($text), replace: true);
+            $this->stream(to: 'answer', content: $markdownRenderer->toHtml($text), replace: true);
         }
 
         $this->chat[] = [
             'role' => 'assistant',
-            'content' => $this->renderMarkdown($text),
+            'content' => $markdownRenderer->toHtml($text),
             'sources' => collect($this->context)
-                ->map(fn(array $item) => $item['sources'])
+                ->map(fn (array $item) => $item['sources'])
                 ->flatten()
                 ->unique()
                 ->take(3)
                 ->toArray(),
         ];
-    }
-
-    private function renderMarkdown(string $text): string
-    {
-        return app(\Spatie\LaravelMarkdown\MarkdownRenderer::class)->toHtml($text);
     }
 
     public function render()

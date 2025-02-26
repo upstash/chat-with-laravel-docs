@@ -28,7 +28,7 @@
                         <div class="flex mr-4">
                             <div>
                                 <div class="text-xs p-1">Assistant</div>
-                                <div class="rounded-lg bg-gray-100 dark:bg-slate-600 px-3 py-2 text-sm whitespace-pre-wrap">{!! $message['content'] !!}</div>
+                                <div class="rounded-lg bg-gray-100 dark:bg-slate-600 px-3 py-2 text-sm whitespace-pre-wrap markdown">{!! $message['content'] !!}</div>
                                 @if (isset($message['sources']) && count($message['sources']) > 0)
                                 <div class="pt-4">
                                     <h3 class="pb-2 text-xs">Sources</h3> 
@@ -47,7 +47,7 @@
                 <div class="flex mr-4">
                     <div>
                         <div class="text-xs p-1">Assistant</div>
-                        <div class="rounded-lg bg-gray-100 dark:bg-slate-600 px-3 py-2 text-sm whitespace-pre-wrap" wire:stream="answer">Thinking...</div>
+                        <div class="rounded-lg bg-gray-100 dark:bg-slate-600 px-3 py-2 text-sm whitespace-pre-wrap markdown" wire:stream="answer">Thinking...</div>
                     </div>
                 </div>
                 @endif
@@ -75,9 +75,7 @@
             <div class="overflow-y-scroll flex-1 flex flex-col space-y-6 divide-y dark:divide-slate-700">
                 @foreach ($context as $item)
                     <div class="p-6">
-                        <x-markdown class="markdown">
-                        {{ $item['text'] }}
-                        </x-markdown>
+                        <x-markdown class="markdown whitespace-pre-wrap">{!! $item['text'] !!}</x-markdown>
                         <div class="pt-6">
                             <h3 class="font-semibold pb-2 text-sm">Sources</h3>
                             <ul>

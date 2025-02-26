@@ -38,7 +38,7 @@ class QueryController extends Controller
     private function findUrl(array $sources): string
     {
         return collect($sources)
-            ->sortBy(fn($source) => strlen($source))
+            ->sortBy(fn ($source) => strlen($source))
             ->reverse()
             ->first();
     }

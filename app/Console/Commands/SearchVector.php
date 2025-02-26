@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Actions\Rerank;
 use Illuminate\Console\Command;
 use OpenAI\Laravel\Facades\OpenAI;
 use Upstash\Vector\DataQuery;
@@ -42,7 +41,7 @@ class SearchVector extends Command
         ];
 
         while (true) {
-            $this->info('Messages: ' . count($this->messages));
+            $this->info('Messages: '.count($this->messages));
             $this->promptSearch();
         }
     }
@@ -70,7 +69,7 @@ class SearchVector extends Command
         ));
 
         $context = collect($results)
-            ->map(fn(VectorMatch $result) => $result->data)
+            ->map(fn (VectorMatch $result) => $result->data)
             ->implode("\n---\n");
 
         $this->messages[] = [
@@ -78,7 +77,7 @@ class SearchVector extends Command
             'content' => view('prompts.question', ['question' => $question, 'context' => $context])->render(),
         ];
 
-        $result = spin(fn() => OpenAI::chat()->create([
+        $result = spin(fn () => OpenAI::chat()->create([
             'model' => 'gpt-4o-mini',
             'messages' => $this->messages,
         ]));
