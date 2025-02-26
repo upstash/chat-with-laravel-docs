@@ -117,7 +117,7 @@ class ChatPage extends Component
 
         $this->chat[] = [
             'role' => 'assistant',
-            'content' => $markdownRenderer->toHtml($text),
+            'content' => $markdownRenderer->highlightCode()->toHtml($text),
             'sources' => collect($this->context)
                 ->map(fn (array $item) => $item['sources'])
                 ->flatten()
