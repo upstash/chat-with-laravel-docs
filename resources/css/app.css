@@ -19,13 +19,21 @@
 }
 
 .markdown p {
-    @apply text-sm py-1.5;
+    @apply text-sm py-1.5  leading-8;
+}
+
+.markdown ol li {
+    @apply list-decimal list-inside;
+}
+
+.markdown ul li{
+    @apply list-disc list-inside;
 }
 
 .markdown code {
-    @apply block bg-gray-100 text-sm p-4 rounded-lg;
+    @apply block bg-gray-100 dark:bg-slate-700 text-sm p-4 rounded-lg;
 }
 
-.markdown p code {
-    @apply inline-block bg-gray-100 text-sm p-0.5 rounded-lg;
+.markdown p code, .markdown li code {
+    @apply inline-block bg-gray-100 dark:bg-slate-700 text-sm px-2 py-0.5 rounded-lg;
 }
