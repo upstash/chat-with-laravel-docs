@@ -30,7 +30,7 @@
                         <div class="flex mr-4">
                             <div>
                                 <div class="text-xs p-1">Assistant</div>
-                                <div class="rounded-lg bg-gray-100 dark:bg-slate-600 px-3 py-2 text-sm whitespace-pre-wrap markdown">{!! $message['content'] !!}</div>
+                                <div class="rounded-lg bg-gray-100 dark:bg-slate-600 px-3 py-2 text-sm markdown">{!! $message['content'] !!}</div>
                                 @if (isset($message['sources']) && count($message['sources']) > 0)
                                 <div class="pt-4">
                                     <h3 class="pb-2 text-xs">Sources</h3> 
@@ -49,7 +49,7 @@
                 <div class="flex mr-4">
                     <div>
                         <div class="text-xs p-1">Assistant</div>
-                        <div class="rounded-lg bg-gray-100 dark:bg-slate-600 px-3 py-2 text-sm whitespace-pre-wrap markdown" wire:stream="answer">Thinking...</div>
+                        <div class="rounded-lg bg-gray-100 dark:bg-slate-600 px-3 py-2 text-sm markdown" wire:stream="answer">Thinking...</div>
                     </div>
                 </div>
                 @endif
