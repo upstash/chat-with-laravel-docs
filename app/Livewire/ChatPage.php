@@ -103,17 +103,18 @@ class ChatPage extends Component
         $stream = OpenAI::chat()->createStreamed([
             'model' => 'gpt-4o-mini',
             'messages' => $messages,
+            'max_tokens' => 8000,
         ]);
 
         $text = '';
         foreach($stream as $response) {
             $text .= $response->choices[0]->delta->content;
-            $this->stream(to: 'answer', content: $text, replace: true);
+            $this->stream(to: 'answer', content: $this->renderMarkdown($text), replace: true);
         }
 
         $this->chat[] = [
             'role' => 'assistant',
-            'content' => $text,
+            'content' => $this->renderMarkdown($text),
             'sources' => collect($this->context)
                 ->map(fn(array $item) => $item['sources'])
                 ->flatten()
@@ -121,6 +122,11 @@ class ChatPage extends Component
                 ->take(3)
                 ->toArray(),
         ];
+    }
+
+    private function renderMarkdown(string $text): string
+    {
+        return app(\Spatie\LaravelMarkdown\MarkdownRenderer::class)->toHtml($text);
     }
 
     public function render()
