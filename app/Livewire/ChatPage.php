@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Actions\Rerank;
+use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Component;
 use OpenAI\Laravel\Facades\OpenAI;
 use Upstash\Vector\DataQuery;
@@ -29,6 +30,10 @@ class ChatPage extends Component
 
     public function askQuestion()
     {
+        if ($this->isRateLimited()) {
+            return;
+        }
+
         // reset and append new message to chat
         $this->chat = [
             [
@@ -48,6 +53,23 @@ class ChatPage extends Component
         $this->question = '';
         $this->context = [];
         $this->isChatLoading = true;
+    }
+
+    private function isRateLimited(): bool
+    {
+        $key = sprintf('chat:%s', request()->ip());
+
+        if (RateLimiter::tooManyAttempts($key, maxAttempts: 10)) {
+            $seconds = RateLimiter::availableIn($key);
+            $message = sprintf('You have been rate-limited. You may try again in %s seconds.', $seconds);
+            $this->js(sprintf("alert('%s')", $message));
+
+            return true;
+        }
+
+        RateLimiter::increment($key);
+
+        return false;
     }
 
     public function processQuestion(string $question)
