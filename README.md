@@ -21,6 +21,7 @@ The chatbot then uses the Vector database to answer questions about the document
 2. Install dependencies with `composer install`
 3. Create an account on Upstash and a Vector index.
 4. Copy the `.env.example` file to `.env` and fill in the required environment variables.
+5. Run `php artisan app:ingest:documentation` to populate the database with the documentation.
 
 ## Usage
 
