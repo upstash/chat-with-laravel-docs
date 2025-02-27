@@ -63,7 +63,7 @@ class ChatPage extends Component
 
         $key = sprintf('chat:%s', md5(request()->ip()));
 
-        if (RateLimiter::tooManyAttempts($key, maxAttempts: 10)) {
+        if (RateLimiter::tooManyAttempts($key, maxAttempts: 1)) {
             $seconds = RateLimiter::availableIn($key);
             $message = sprintf('You have been rate-limited. You may try again in %s seconds.', $seconds);
             $this->js(sprintf("alert('%s')", $message));
