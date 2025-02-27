@@ -43,7 +43,7 @@ return [
      * the default cache store will be used. If you do not want to use
      * caching set this value to `false`.
      */
-    'cache_store' => null,
+    'cache_store' => 'file',
 
     /*
      * When cache_store is enabled, this value will be used to determine
