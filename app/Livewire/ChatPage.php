@@ -57,6 +57,10 @@ class ChatPage extends Component
 
     private function isRateLimited(): bool
     {
+        if (! config('chat.rate_limit_enabled')) {
+            return false;
+        }
+
         $key = sprintf('chat:%s', request()->ip());
 
         if (RateLimiter::tooManyAttempts($key, maxAttempts: 10)) {
