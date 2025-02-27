@@ -2,24 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+.markdown > * + *{
+    @apply mt-4;
+}
+
 .markdown h1 {
-    @apply text-2xl py-1.5;
+    @apply text-xl font-semibold;
 }
 
 .markdown h2 {
-    @apply text-xl py-1.5;
+    @apply text-lg font-semibold;
 }
 
 .markdown h3 {
-    @apply text-lg py-1.5;
+    @apply text-base font-semibold;
 }
 
 .markdown h4 {
     @apply text-base;
 }
 
-.markdown p {
-    @apply text-sm py-1.5  leading-8;
+.markdown p {;
 }
 
 .markdown ol li {
@@ -31,9 +34,9 @@
 }
 
 .markdown code {
-    @apply block bg-gray-200 dark:bg-slate-700 text-sm p-4 rounded-lg;
+    @apply block bg-gray-200 dark:bg-slate-700 text-sm p-4 rounded-lg overflow-auto;
 }
 
 .markdown p code, .markdown li code {
-    @apply inline-block bg-gray-200 dark:bg-slate-700 text-sm px-2 py-0.5 rounded-lg;
+    @apply inline-flex bg-gray-200 dark:bg-slate-700 text-sm px-2 py-0.5 rounded-lg;
 }
