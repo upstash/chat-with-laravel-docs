@@ -61,7 +61,7 @@ class ChatPage extends Component
             return false;
         }
 
-        $key = sprintf('chat:%s', request()->ip());
+        $key = sprintf('chat:%s', md5(request()->ip()));
 
         if (RateLimiter::tooManyAttempts($key, maxAttempts: 10)) {
             $seconds = RateLimiter::availableIn($key);
