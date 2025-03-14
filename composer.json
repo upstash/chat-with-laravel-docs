@@ -15,7 +15,7 @@
         "livewire/livewire": "^3.5",
         "openai-php/laravel": "^0.10.2",
         "spatie/laravel-markdown": "^2.7",
-        "upstash/vector-laravel": "^0.2.2"
+        "upstash/vector-laravel": "^1.0.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
